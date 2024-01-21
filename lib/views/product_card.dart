@@ -11,16 +11,16 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Image.network(image, fit: BoxFit.cover,)),
-            Text(title, style: TextStyle(fontSize: 20),),
+            Text(title, style: const TextStyle(fontSize: 20),),
             Text(rating),
-            Text('\$$price', style: TextStyle(fontSize: 20),)
+            Text('\$$price', style: const TextStyle(fontSize: 20),)
           ],
         ),
       ),

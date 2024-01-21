@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: Obx(() {
                 if (productController.isLoading.value) {
-                  return Center(child: const CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   return AlignedGridView.count(
                       crossAxisCount: 2,
