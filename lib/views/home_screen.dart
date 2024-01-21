@@ -10,25 +10,25 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         leading: GestureDetector(
             child: const Icon(
-              Icons.arrow_back_ios_new,
-              size: 30,
-            )),
+          Icons.arrow_back_ios_new,
+          size: 30,
+        )),
         actions: const [
           InkWell(
               child: Icon(
-                Icons.shopping_cart_outlined,
-                size: 30,
-              )),
+            Icons.shopping_cart_outlined,
+            size: 30,
+          )),
           SizedBox(
             width: 10,
           )
         ],
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
+        child: Column(
+          children: [
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -41,19 +41,24 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          Expanded(
-              child: StaggeredGrid.count(
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                crossAxisCount: 2,
-                children: [
-                  Container(
-                    color: Colors.redAccent,
-                  )
-                ],
-              )),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: AlignedGridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: Colors.redAccent,
+                      height: 200,
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
