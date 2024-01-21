@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:shopx/controllers/product_controller.dart';
+import 'package:shopx/views/product_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final ProductController productController = Get.put(ProductController());
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade50,
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey.shade50,
         leading: GestureDetector(
             child: const Icon(
           Icons.arrow_back_ios_new,
@@ -45,17 +52,26 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             Expanded(
-              child: AlignedGridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      color: Colors.redAccent,
-                      height: 200,
-                    );
-                  }),
+              child: Obx(() {
+                if (productController.isLoading.value) {
+                  return Center(child: const CircularProgressIndicator());
+                } else {
+                  return AlignedGridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      itemCount: productController.productList.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                            title: productController.productList[index].title,
+                            price: productController.productList[index].price
+                                .toString(),
+                            rating: productController.productList[index].rating
+                                .toString(),
+                            image: productController.productList[index].image);
+                      });
+                }
+              }),
             ),
           ],
         ),
